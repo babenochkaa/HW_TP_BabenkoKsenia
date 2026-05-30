@@ -7,7 +7,7 @@ class Ingredient:
         self.unit = unit
 
     def __str__(self):
-        return f"{self.name}: {self.quantity} {self.unit}"
+        return f"{self.name}: {self.quantity:g} {self.unit}"
 
     def __eq__(self, other):
         return (
@@ -109,9 +109,12 @@ class ShoppingList:
                     )
                 )
 
+        result.sort(key=lambda ingredient: ingredient.name)
         return result
 
     def __add__(self, other):
         new_list = ShoppingList()
         new_list.items = self.items + other.items
         return new_list
+    
+    
