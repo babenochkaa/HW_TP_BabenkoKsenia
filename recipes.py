@@ -65,3 +65,53 @@ class DietaryRecipe(Recipe):
 
     def __str__(self):
         return f"{self.title} ({self.diet_type})"
+
+class ShoppingList:
+    def __init__(self):
+        self.items = []
+
+    def add_recipe(self, recipe, portions):
+        if portions <= 0:
+            raise ValueError("Количество порций должно быть больше 0")
+
+        new_recipe = recipe.scale(portions)
+
+        for ingredient in new_recipe.ingredients:
+            self.items.append((ingredient, recipe.title))
+
+    def remove_recipe(self, title):
+        new_items = []
+
+        for ingredient, recipe_title in self.items:
+            if recipe_title != title:
+                new_items.append((ingredient, recipe_title))
+
+        self.items = new_items
+
+    def get_list(self):
+        result = []
+
+        for ingredient, recipe_title in self.items:
+            found = False
+
+            for existing in result:
+                if existing == ingredient:
+                    existing.quantity += ingredient.quantity
+                    found = True
+                    break
+
+            if not found:
+                result.append(
+                    Ingredient(
+                        ingredient.name,
+                        ingredient.quantity,
+                        ingredient.unit
+                    )
+                )
+
+        return result
+
+    def __add__(self, other):
+        new_list = ShoppingList()
+        new_list.items = self.items + other.items
+        return new_list
