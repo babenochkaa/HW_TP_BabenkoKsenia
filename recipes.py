@@ -7,7 +7,7 @@ class Ingredient:
         self.unit = unit
 
     def __str__(self):
-        return f"{self.name}: {self.quantity:g} {self.unit}"
+        return f"{self.name}: {self.quantity:.1f} {self.unit}"
 
     def __eq__(self, other):
         return (
