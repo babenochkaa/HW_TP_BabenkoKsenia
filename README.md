@@ -15,8 +15,8 @@
 
 Склонируйте репозиторий:
 
-git clone <ссылка-на-репозиторий>
-cd HW_TP_Babenko
+git clone https://github.com/babenochkaa/HW_TP_BabenkoKsenia.git
+cd HW_TP_BabenkoKsenia
 
 ## Используемые технологии
 Python 3.12
